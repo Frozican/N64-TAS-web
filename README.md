@@ -53,17 +53,5 @@ Supported ROM formats:
 - `.n64`
 - `.v64`
 
-## Project Structure
-```
-N64-TAS-web/
-│
-├── N64Wasm/
-│   ├── code/        # Mupen64Plus source
-│   ├── dist/        # Compiled WebAssembly output
-│   └── emsdk/       # Emscripten SDK
-│
-└── README.md
-```
-
 ## License
 MIT License.
