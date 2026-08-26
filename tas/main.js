@@ -4,6 +4,26 @@ let ModuleReady = false;
 let frameIndex = 0;
 let frameStates = [];
 
+// Controller-Input Zustand (noch ohne Logik)
+const controllerState = {
+    A: 0,
+    B: 0,
+    Z: 0,
+    Start: 0,
+    Up: 0,
+    Down: 0,
+    Left: 0,
+    Right: 0,
+    L: 0,
+    R: 0,
+    CUp: 0,
+    CDown: 0,
+    CLeft: 0,
+    CRight: 0,
+    StickX: 0,
+    StickY: 0
+};
+
 // Buttons als Variablen
 const pauseBtn = document.getElementById("pauseBtn");
 const frameForwardBtn = document.getElementById("frameForwardBtn");
@@ -29,30 +49,4 @@ function loadState(data) {
     const ptr = Module._malloc(data.length);
     Module.HEAPU8.set(data, ptr);
     Module._state_load(ptr);
-    Module._free(ptr);
-}
-
-// Pause
-pauseBtn.onclick = () => {
-    tasPaused = !tasPaused;
-    pauseBtn.textContent = tasPaused ? "Resume" : "Pause";
-};
-
-// Frame +1
-frameForwardBtn.onclick = () => {
-    if (!ModuleReady) return;
-
-    Module._mainLoopStep();
-
-    frameStates[frameIndex] = saveState();
-    frameIndex++;
-};
-
-// Frame -1
-frameBackBtn.onclick = () => {
-    if (!ModuleReady) return;
-    if (frameIndex <= 0) return;
-
-    frameIndex--;
-    loadState(frameStates[frameIndex]);
-};
+    Module
