@@ -4,6 +4,11 @@ let ModuleReady = false;
 let frameIndex = 0;
 let frameStates = [];
 
+// Buttons als Variablen
+const pauseBtn = document.getElementById("pauseBtn");
+const frameForwardBtn = document.getElementById("frameForwardBtn");
+const frameBackBtn = document.getElementById("frameBackBtn");
+
 Module.onRuntimeInitialized = () => {
     ModuleReady = true;
     console.log("N64Wasm connected.");
@@ -28,13 +33,13 @@ function loadState(data) {
 }
 
 // Pause
-document.getElementById("pauseBtn").onclick = () => {
+pauseBtn.onclick = () => {
     tasPaused = !tasPaused;
-    document.getElementById("pauseBtn").textContent = tasPaused ? "Resume" : "Pause";
+    pauseBtn.textContent = tasPaused ? "Resume" : "Pause";
 };
 
 // Frame +1
-document.getElementById("frameForwardBtn").onclick = () => {
+frameForwardBtn.onclick = () => {
     if (!ModuleReady) return;
 
     Module._mainLoopStep();
@@ -44,7 +49,7 @@ document.getElementById("frameForwardBtn").onclick = () => {
 };
 
 // Frame -1
-document.getElementById("frameBackBtn").onclick = () => {
+frameBackBtn.onclick = () => {
     if (!ModuleReady) return;
     if (frameIndex <= 0) return;
 
